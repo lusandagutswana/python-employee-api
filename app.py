@@ -4,13 +4,11 @@ from database import db, init_db
 from models import Employee
 
 app = Flask(__name__)
-CORS(app)  # Enable CORS for all routes
+CORS(app)
 
-# Initialize database
 init_db(app)
 
 
-# Helper function for error responses
 def error_response(message, status_code):
     return jsonify({'error': message}), status_code
 
@@ -163,18 +161,5 @@ def search_employees():
         })
     except Exception as e:
         return error_response(str(e), 500)
-
-
-if __name__ == '__main__':
-    # Run the Flask app
-    print("Starting Employee API...")
-    print("API Endpoints:")
-    print("  GET    /api/health")
-    print("  GET    /api/employees")
-    print("  POST   /api/employees")
-    print("  GET    /api/employees/<id>")
-    print("  PUT    /api/employees/<id>")
-    print("  DELETE /api/employees/<id>")
-    print("  GET    /api/employees/search?department=<dept>&position=<pos>")
 
     app.run(debug=True, host='0.0.0.0', port=5000)
